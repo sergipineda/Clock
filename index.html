@@ -11,14 +11,33 @@
 </div>
 <script>
     var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-    var radius = canvas.height /2;
-    ctx.translate(radius, radius);
-    radius = radius * 0.90
-    drawClock();
 
-    function drawClock() {
-        ctx.arc(0, 00, radius, 0 , 2*Math.PI);
+    var radius = canvas.height /2;
+
+    radius = radius * 0.90
+    if (canvas && canvas.getContext) {
+        var ctx = canvas.getContext("2d");
+        ctx.translate(radius, radius);
+        if (ctx) {
+            // calcula la anchura y la altura del canvas
+            var s = getComputedStyle(canvas);
+            var w = s.width;
+            var h = s.height;
+            // extrae el valor numerico
+            W = canvas.width = w.split("px")[0];
+            H = canvas.height = h.split("px")[0];
+            // calcula las coordenadas del centro y el radio
+            X = Math.floor(W/2);
+            Y = Math.floor(H/2);
+            r = Math.floor(W/3);
+            // dibuja el circulo en el canvas
+
+        }
+    }
+    drawClock(ctx);
+
+    function drawClock(ctx) {
+        ctx.arc( X,Y,r,0,2*Math.PI);
         ctx.fillStyle = "white";
         ctx.fill();
     }
